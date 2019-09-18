@@ -17,4 +17,4 @@ Urban Ministries of Durham assist around 6,000 people each year who need food, s
 
 **Approach**
 
-To approach these two questions (1) a bar plot with the frequencies of ‘Type of Bill Paid’ will be plotted with a color-code shading of the average amount paid, and (2) a bar plot of the frequency of meals 'Food Provided For' served throughout the duration of the year 'Date' will also be plotted. Having this information handy at the moment of meeting with potential donors is of great importance to communicate how important their help is.
+To approach these two questions (1) a bar plot with the frequencies of *type of bill paid* will be plotted with the *average amount paid* as the shading, and (2) a bar plot of the frequency of meals *food provided* served throughout the *duration of the year* will also be plotted. Having this information handy at the moment of meeting with potential donors is of great importance to communicate how important their help is.
