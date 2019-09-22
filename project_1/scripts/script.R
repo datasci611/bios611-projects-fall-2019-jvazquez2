@@ -1,0 +1,117 @@
+library(tidyverse)
+
+# Importing Data
+mydf_original <- read_tsv("https://raw.githubusercontent.com/biodatascience/datasci611/gh-pages/data/project1_2019/UMD_Services_Provided_20190719.tsv")
+
+################# Plot 1 #################
+
+# Removing observations that have NAs in type of bill paid and financial support
+mydf <- mydf_original[-which(is.na(mydf_original$`Financial Support`)),]
+mydf <- mydf[-which(is.na(mydf$`Type of Bill Paid`)),]
+
+#changing all characters to lower case and grouping them by category
+mydf$`Type of Bill Paid` <- (tolower(mydf$`Type of Bill Paid`))
+
+for (i in 1:dim(mydf)[1]) {
+    
+    if(str_detect(mydf[i,14], c("duke")) || str_detect(mydf[i,14], c("power")) || str_detect(mydf[i,14], "electricity") || str_detect(mydf[i,14], "energy")){
+        mydf[i,14] <- paste("Electricity Bill") 
+        next
+    }
+    
+    if(str_detect(mydf[i,14], "water")){
+        print(i)
+        mydf[i,14] <- paste("Water Bill") 
+        next
+    }
+    
+    if(str_detect(mydf[i,14], "bus") || str_detect(mydf[i,14], "greyhound") || str_detect(mydf[i,14], "ticket") || str_detect(mydf[i,14], "car")){
+        print(i)
+        mydf[i,14] <- paste("Transportation") 
+        next
+    }
+    
+    if(str_detect(mydf[i,14], "rent") || str_detect(mydf[i,14], "mortgage") || str_detect(mydf[i,14], "deposit")){
+        print(i)
+        mydf[i,14] <- paste("Housing") 
+        next
+    }
+    
+    if(str_detect(mydf[i,14], "gas") || str_detect(mydf[i,14], "heating")){
+        print(i)
+        mydf[i,14] <- paste("Gas Bill") 
+        next
+    }
+    
+    if(str_detect(mydf[i,14], "prescription") || str_detect(mydf[i,14], "med") || str_detect(mydf[i,14], "hospital") || str_detect(mydf[i,14], "eyeglasses") || str_detect(mydf[i,14], "pharmacy")){
+        print(i)
+        mydf[i,14] <- paste("Medical Expenses") 
+        next
+    }
+    
+    mydf[i,14] <- paste("Other")
+}
+
+# Getting a count financial support requests by type of bill
+typesofbill <- as.data.frame(table(mydf$`Type of Bill Paid`))
+colnames(typesofbill) <- c("name", "count")
+typesofbill <- typesofbill[order(-typesofbill$count),]
+mymeans <- aggregate(mydf$`Financial Support`, by=list(mydf$`Type of Bill Paid`), mean)
+colnames(mymeans) <- c("name", "mean")
+
+# Merging the count and means per airport. Normalized value will mean divided by the number of flights from that airport
+finaldf <- merge(typesofbill, mymeans, by='name') 
+finaldf$mean <- round(finaldf$mean, 2)
+finaldf$meandollar <- paste("($",finaldf$mean,")")
+
+#Sort by count decreasing order
+finaldf <- finaldf[order(-finaldf$count),]
+
+
+# Plot 1
+
+p1 <- ggplot(finaldf, aes(x= reorder(finaldf$name, -finaldf$count), y=finaldf$count)) + theme_minimal() + 
+    geom_bar(stat="identity", width=.5, fill = "#FFDB6D", color = "#C4961A") + geom_text(aes(x=finaldf$name, y=finaldf$count+10, label = finaldf$meandollar)) +
+    labs(title="Types of Bills Paid Through Financial Support", subtitle = 'Values in Parentheses Denote Mean Support', caption="source: Urban Ministries of Durham", y = 'Count', x = '') +
+    theme(axis.text.x = element_text(angle=90, vjust=0.6))
+p1
+
+################# Plot 2 #################
+library(reshape2)
+library(stringr)
+mydf <- mydf_original
+mydates <- colsplit(mydf$Date, "/", names = c("Month", "Day", "Year"))
+
+mydf <- cbind(mydates, mydf) %>% 
+        subset(Year >= 2010, select = c('Food Provided for', "Month", "Year")) %>%
+        subset(Year <= 2019)
+
+mealspermonth <- aggregate(. ~ Month + Year, data = mydf, sum, na.rm = TRUE)
+colnames(mealspermonth) <- c("Month", "Year", "Count")
+mealspermonth$Year <- as.factor(mealspermonth$Year)
+
+temporarydf <- spread(mealspermonth, key = Year, value = Count)
+temporarydf$`2010-2017 Average` <- (temporarydf$`2010`+ temporarydf$`2011` + temporarydf$`2012` + temporarydf$`2013` + temporarydf$`2014` + temporarydf$`2015` + temporarydf$`2016` +temporarydf$`2017`)/8
+mealspermonth <- gather(temporarydf, "Year", "Count", 2:12)
+mealspermonth <- subset(mealspermonth, Year %in% c("2018", "2010-2017 Average"))
+
+mealspermonth[which(mealspermonth$Month == 1),4] <- paste("January")
+mealspermonth[which(mealspermonth$Month == 2),4] <- paste("February")
+mealspermonth[which(mealspermonth$Month == 3),4] <- paste("March")
+mealspermonth[which(mealspermonth$Month == 4),4] <- paste("April")
+mealspermonth[which(mealspermonth$Month == 5),4] <- paste("May")
+mealspermonth[which(mealspermonth$Month == 6),4] <- paste("June")
+mealspermonth[which(mealspermonth$Month == 7),4] <- paste("July")
+mealspermonth[which(mealspermonth$Month == 8),4] <- paste("August")
+mealspermonth[which(mealspermonth$Month == 9),4] <- paste("September")
+mealspermonth[which(mealspermonth$Month == 10),4] <- paste("October")
+mealspermonth[which(mealspermonth$Month == 11),4] <- paste("November")
+mealspermonth[which(mealspermonth$Month == 12),4] <- paste("December")
+
+# Plot 2
+p2 <-ggplot(mealspermonth, aes(x= reorder(V4, Month), y=Count, group=Year)) + theme_minimal() +
+    geom_line(aes(color=Year)) +
+    geom_point(aes(color=Year)) +
+    labs(title="Number of Meals Per Month", subtitle = '2010 to 2017 Average vs. 2018', caption="source: Urban Ministries of Durham", y = 'Count', x = '') +
+    theme(axis.text.x = element_text(angle=90, vjust=0.6), legend.position="bottom")  
+p2
