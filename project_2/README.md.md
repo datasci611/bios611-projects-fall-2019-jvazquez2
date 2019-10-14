@@ -10,7 +10,7 @@ Urban Ministries of Durham assist around 6,000 people each year who need food, s
 
 **Motivation**
 
-One of the major services that homeless-shelters provide, just as Urban Ministries of Durham, is to provide food to those that need it. For this reason, this project will keep to create a Shiny that will allow the user to retrieve insightful statistics about the past on the number of meals provide per the requested timeline.
+One of the major services that homeless-shelters provide, just as Urban Ministries of Durham, is to provide food to those that need it. For this reason, this project will aim to create a Shiny that will allow the user to retrieve insightful statistics about the past on the number of meals provided per the requested timeline.
 
 **Approach**
 
