@@ -10,10 +10,8 @@ Urban Ministries of Durham assist around 6,000 people each year who need food, s
 
 **Motivation**
 
-One of the major services that homeless-shelters provide, just as Urban Ministries of Durham, is to provide food to those that need it. For this reason, this project will aim to create a Shiny that will allow the user to retrieve insightful statistics about the past on the number of meals provided per the requested timeline.
+Financial support was a service provided by the Urban Ministries of Durham but was discontinued. Some individuals need financial support to be able to get to another state where they have family, or they might just need to pay their electricity bill during the summer. This shinny will allow service members to understand how and when financial support was used. 
 
 **Approach**
 
-The proposed shiny will have a box-plot graph of the recorded number of meals per month for a selected month. From this level there will be a summary on the record max, record min, average of min and max, and the average number of meals. Additionally, the user will be able to select a specific day from that month from which the same statistics will be provided for that specific day. 
-
-Having this tool to retrieve information can be useful while deciding how much food to prepare on festive days or just on a regular day.
+This shinny will allow the user to select the type of bill used to pay for financial support. The user will be given a box-plot in addition with the mean, max, min and the dates when the min and max of the awarded amount.  
