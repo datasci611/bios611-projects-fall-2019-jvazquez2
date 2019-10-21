@@ -1,7 +1,7 @@
 library(shiny)
 
 # Loading helper functions
-source("F:\\UNC\\FALL 2019\\BIOS 611\\bios611-projects-fall-2019-jvazquez2\\project_2\\scripts\\helper_script.R")
+source("helper_script.R")
 mydata = loaddata()
 
 # Define UI for app that draws a histogram and a data table----
