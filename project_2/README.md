@@ -15,3 +15,7 @@ Financial support was a service provided by the Urban Ministries of Durham but w
 **Approach**
 
 This shinny will allow the user to select the type of bill used to pay for financial support. The user will be given a box-plot in addition with the mean, max, min and the dates when the min and max of the awarded amount.  
+
+**Link**
+
+https://jesusvazquez.shinyapps.io/bios611/
