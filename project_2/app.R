@@ -2,8 +2,6 @@ library(tidyverse)
 
 source("helper_script.R")
 
-mydata = loaddata()
-
 # Define UI for app that draws a histogram and a data table----
 ui <- fluidPage(
     

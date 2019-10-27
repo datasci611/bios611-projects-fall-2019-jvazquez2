@@ -65,6 +65,8 @@ loaddata <- function(){
     return(mydf)
 }
 
+mydata <- loaddata()
+
 # Helper function to create plot by 
 f <- function(typeofbill){
     mydata_plot = mydata %>% subset(mydata$`Type of Bill Paid` == typeofbill)
