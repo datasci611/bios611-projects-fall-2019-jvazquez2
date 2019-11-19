@@ -16,7 +16,7 @@ Just as with any other organization, validation of the organization efforts is n
 
 To determine the financial performance of the organization from the Urban Ministries of Durham the first digit of the net income, expenses and income-expenses will be considered. Theoretically, this should follow a Bendford distribution and any deviations from this distribution would suggest fabricated numbers. For the second part of the project, we will count the number of patients that came in with a condition (e.g. - mental health problem) and left with (1) none, (2) the same, or (3) with more problems. The change in health related conditions will be illustrated using bar-plots, stratified by ethnicity.
 
-**Report
+**Report**
 
 The report for this study can be found under the folder 'results'.
 
