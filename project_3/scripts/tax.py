@@ -9,9 +9,10 @@ import sys
 import math
 
 # Import Data Tax Data 
-df = pd.read_csv(r'C:\Users\15056\Documents\BIOS611\bios611-projects-fall-2019-jvazquez2\project_3\data\IRS.csv')
+df = pd.read_csv(r'../data/IRS.csv')
 df = df[df.Net >= 0]
 data = df['Net']
+
 
 # Counting the first digit
 def count_first_digit(data_str):
