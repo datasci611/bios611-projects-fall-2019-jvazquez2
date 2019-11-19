@@ -9,7 +9,7 @@ import sys
 import math
 
 # Import Data Tax Data 
-df = pd.read_csv(r'../Data/IRS.csv')
+df = pd.read_csv(r'../data/IRS.csv')
 df = df[df.Net >= 0]
 data = df['Net']
 
