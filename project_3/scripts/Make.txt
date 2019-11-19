@@ -1,10 +1,13 @@
 #need to make the docker
 
-patients_data_graph.csv: 
-    python Project3UMD.ipynb patients_data_graph.csv
-
 tax_data_graph.csv:
-    python Project3UMD.ipynb tax_data_graph.csv
+	python tax.py tax_data_graph.csv
 
-Project3.html: tax_data_graph.csv patients_data_graph.csv
-    Rscript Project3.Rmd Project3.html
+patients_data_graph.csv:
+	python patientsdata.py patients_data_graph.csv
+
+taxplot.png: tax_data_graph.csv
+	Rscript tax_graph.R taxplot.png
+
+agedist.png: patients_data_graph.csv
+	Rscript patients_data_graph.R agedist.png
