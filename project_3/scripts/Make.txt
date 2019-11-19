@@ -1,4 +1,5 @@
-#need to make the docker
+project3_docker:
+	docker build -t project3_docker .
 
 tax_data_graph.csv:
 	python tax.py tax_data_graph.csv
@@ -7,7 +8,7 @@ patients_data_graph.csv:
 	python patientsdata.py patients_data_graph.csv
 
 taxplot.png: tax_data_graph.csv
-	Rscript tax_graph.R taxplot.png
+	docker run -d --rm -v $(pwd):$(pwd) -w $(pwd) project3_docker Rscript tax_graph.R 
 
 agedist.png: patients_data_graph.csv
-	Rscript patients_data_graph.R agedist.png
+	docker run -d --rm -v $(pwd):$(pwd) -w $(pwd) project3_docker Rscript patients_data_graph.R 
