@@ -3,8 +3,9 @@ title: "Project 3 - Urban Ministries of Durham"
 author: "Jesus E. Vazquez"
 date: "11/18/2019"
 output:
-  html_document: default
   pdf_document: default
+  word_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
