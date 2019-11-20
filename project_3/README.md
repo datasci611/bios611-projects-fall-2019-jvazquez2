@@ -19,5 +19,5 @@ To determine the financial performance of the organization from the Urban Minist
 
 **Report**
 
-The report for this study can be found under the folder 'results'.
+Please see the PDF version of the results under the 'results' folder. For a more detailed explanation of the hypothesis testing please see __Project3UMD.ipynb__.
 
