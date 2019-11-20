@@ -1,2 +1,1 @@
-FROM rocker/tidyverse
-FROM python:3
+FROM jupyter/datascience-notebook
