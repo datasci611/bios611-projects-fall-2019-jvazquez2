@@ -21,3 +21,7 @@ To determine the financial performance of the organization from the Urban Minist
 
 Please see the PDF version of the results under the 'results' folder. For a more detailed explanation of the hypothesis testing please see __Project3UMD.ipynb__.
 
+
+__Note__
+
+To generate report pull the repository. Once on the scripts folder run _make runall_
