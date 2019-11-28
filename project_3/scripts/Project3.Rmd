@@ -65,7 +65,7 @@ my_tax_data = read_csv("tax_data_graph.csv")
 
 tax_plot = ggplot(data=my_tax_data, aes(x=Number, y=value, fill=variable)) +
   geom_bar(stat="identity", color="black", position=position_dodge()) + theme_minimal() +
-  labs(title = "Urban Ministries of Durham - 2006-2018 Tax Fraud Analysis", subtitle = 'Net-Income', y = 'Percentage (%)', fill = "Group") +
+  labs(title = "Urban Ministries of Durham - 2006-2018 Tax Fraud Analysis", subtitle = 'First digit of net-income reported per year', y = 'Percentage (%)', fill = "Group") +
   scale_x_continuous("Digit", labels = as.character(my_tax_data$Number), breaks = my_tax_data$Number)
 
 print(tax_plot)
@@ -85,7 +85,7 @@ patient_plot = ggplot(my_patient_data, aes(x=Gender, y = my_patient_data$`Client
   geom_boxplot(fill='#00BFC4') +
   theme_minimal() +  
   labs(title = "Distributions of Age of Patients who Gained Disability", subtitle = 'Stratified by Gender', y = 'Age', x = 'Gender') +
-  theme(axis.text.x = element_text(angle = 65, hjust = 1))
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
 print(patient_plot)
 ```
@@ -100,7 +100,7 @@ read_csv("counts.csv") %>%
     geom_bar(position="dodge", stat="identity") +
     labs(title = 'Count of Disabilities Attainted while at UMD', subtitle = 'By Gender', y = 'Count') +
     theme_minimal() +
-    theme(axis.text.x = element_text(angle = 65, hjust = 1))
+    theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
 Here we can observe that men are in every single category and that women are the ones most affected in the "Mental Health" area. To further investigate this issue we conducted a logistic regression in the next section.
