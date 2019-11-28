@@ -1,18 +1,12 @@
-# This python file will create the data for the first plot
-
-# Importing packages 
-import numpy as np
-from scipy import stats
-import scipy
+# Importing packages and data
 import pandas as pd
-import sys
-import math
+import numpy as np
 
-# Import Data Tax Data 
+# Importing data and subsetting to only include those years with a positive gain in when reporting taxes 
 df = pd.read_csv(r'../data/IRS.csv')
 df = df[df.Net >= 0]
 data = df['Net']
-
+# 12 observations
 
 # Counting the first digit
 def count_first_digit(data_str):
@@ -56,22 +50,11 @@ BENFORD = [30.1, 17.6, 12.5, 9.7, 7.9, 6.7, 5.8, 5.1, 4.6]
 # Get the expected number of counts
 expected_counts=[round(p * total_count / 100) for p in BENFORD]
 
-# Observed vs Expected  
-chi_square_stat = 0  # chi square test statistic
-for data, expected in zip(data_count,expected_counts):
-    chi_square = math.pow(data - expected, 2)
-    chi_square_stat += chi_square / expected
+# Export data
+data = {'Counts':data_count, 'ExpectedCounts':expected_counts} 
+pd.DataFrame(data).to_csv("fraud_chisq.csv") 
 
-print("\nChi-squared Test Statistic = {:.3f}".format(chi_square_stat))
-print("Critical value at a P-value of 0.05 is 15.51.")
-
-print("actual counts are", data_count)
-print("expected counts are", expected_counts)
-
-# Wilxocon Rank-Sum Test
-scipy.stats.mannwhitneyu(data_count,expected_counts)
-
-# Save data and export to R-Studio to create graphs
+# Save data and export to recreate plot in R-Studio
 out_tax = pd.DataFrame(columns=['Number', 'Empirical Percentage', 'Benford Distribution'])
 out_tax['Number'] = numbers
 out_tax['Empirical Percentage'] = data_percentage
