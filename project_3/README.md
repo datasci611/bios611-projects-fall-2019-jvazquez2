@@ -19,7 +19,7 @@ To determine the financial performance of the organization from the Urban Minist
 
 **Report**
 
-To see the raw report check the 'results' folder. To see a web-friendly report click this [link](https://htmlpreview.github.io/?https://github.com/datasci611/bios611-projects-fall-2019-jvazquez2/blob/master/project_3/results/Project3.html).
+To see the raw report check the 'results' folder. To see a web-friendly report click this [link](https://htmlpreview.github.io/?https://github.com/datasci611/bios611-projects-fall-2019-jvazquez2/blob/master/project_3/results/Project3.html). Presentation can be found on this [link](https://drive.google.com/file/d/1AudZlKZWShXSmRDvgKG2XjHk49aPFN0W/view?usp=sharing)
 
 __Note__
 
