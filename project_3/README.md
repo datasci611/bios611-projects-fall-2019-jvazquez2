@@ -23,4 +23,4 @@ To see the raw report check the 'results' folder. To see a web-friendly report c
 
 __Note__
 
-To generate report pull the repository. Once on the scripts folder run _make runall_
+To generate report pull the repository. Once on the scripts folder run _make ../results/Project3.html_
