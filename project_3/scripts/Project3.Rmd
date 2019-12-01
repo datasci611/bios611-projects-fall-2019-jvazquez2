@@ -124,6 +124,7 @@ mydata = read_csv("logistic_data.csv") %>%
 model = glm(data = mydata, GotDisability ~ Gender*Age_Cat*`Client Ethnicity`, family = binomial(link="logit"))
 model.backward = step(model, direction = 'backward', trace = 0)
 
+# install.packages(c('sjPlot', 'pROC', 'MatchIt'))
 library(sjPlot)
 tab_model(model.backward, file="output.html", show.r2 = FALSE, title = 'Logistic Regression: OR Estimates for Disability Attainment')
 # exp(model.backward$coefficients)
@@ -134,7 +135,7 @@ predpr = predict(model.backward,type=c("response"))
 roccurve <- roc(mydata$GotDisability ~ predpr)
 ```
 
-From the logistic regression output we can observe that no interactions were found when approximating the best fitting model using backward-selection method. The best model identified **gender** and **age** of the participants as statistically significant risk factors at the 0.01 and 0.10 level respectively. From this model it was found that on average, the odds of males of getting a new disability while staying at UMD is 0.40 times the odds of women. Additionally, it was found that the odds of getting a new disability for homeless people between the ages of 55 to 64 was 3.57 times the odds of individuals who age was less than 25. The performance of the model was fair with an AUC score of `round(auc(roccurve),2)`. The rest of the summary statistics are found above.
+From the logistic regression output we can observe that no interactions were found when approximating the best fitting model using backward-selection method. The best model identified **gender** and **age** of the participants as statistically significant risk factors at the 0.01 and 0.10 level respectively. From this model it was found that on average, the odds of males of getting a new disability while staying at UMD is 0.40 times the odds of women. Additionally, it was found that the odds of getting a new disability for homeless people between the ages of 55 to 64 was 3.57 times the odds of individuals who age was less than 25. The performance of the model was fair with an AUC score of `r round(auc(roccurve),2)`. The rest of the summary statistics are found above.
 
 **Case Control Analysis - Propensity Scores**
 
