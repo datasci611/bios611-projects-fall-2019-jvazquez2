@@ -14,7 +14,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Background Description
 
-Urban Ministries of Durham assist around 6,000 people each year who need food, shelter, clothing and/or supportive services. Some of the programs that they offer is a (1) community shelter where people are given a place to sleep and assistance to help them find a home, a (2) Community Café that serves three meals a day, seven days a week, 365 days a year, and a (3) food and clothing closet for those that either need food or clothing. 
+Urban Ministries of Durham assist around 6,000 people each year who need food, shelter, clothing and/or supportive services. Some of the programs that they offer is a (1) community shelter where people are given a place to sleep and assistance to help them find a home, a (2) Community CafÃ© that serves three meals a day, seven days a week, 365 days a year, and a (3) food and clothing closet for those that either need food or clothing. 
 
 ## Motivation
 
@@ -124,10 +124,10 @@ mydata = read_csv("logistic_data.csv") %>%
 model = glm(data = mydata, GotDisability ~ Gender*Age_Cat*`Client Ethnicity`, family = binomial(link="logit"))
 model.backward = step(model, direction = 'backward', trace = 0)
 
-# install.packages(c('sjPlot', 'pROC', 'MatchIt'))
-library(sjPlot)
-tab_model(model.backward, file="output.html", show.r2 = FALSE, title = 'Logistic Regression: OR Estimates for Disability Attainment')
-# exp(model.backward$coefficients)
+# library(sjPlot)
+#tab_model(model.backward, file="output.html", show.r2 = FALSE, title = 'Logistic Regression: OR Estimates for Disability Attainment')
+#exp(model.backward$coefficients)
+summary(model.backward)
 
 # Get AUC
 library(pROC)
@@ -152,7 +152,8 @@ ccdata = matchit(GotDisability ~ as.factor(Gender) + as.factor(Age_Cat) + as.fac
 matched_data <- match.data(ccdata) # create ps matched data set from previous output
 cc.model = glm(GotDisability ~  Gender+Age_Cat, data = matched_data, family = binomial(link = "logit"))
 # exp(cc.model$coefficients)
-tab_model(cc.model, file="output.html", show.r2 = FALSE, title = 'Logistic Regression: CC OR Estimates for Disability Attainment')
+# tab_model(cc.model, file="output.html", show.r2 = FALSE, title = 'Logistic Regression: CC OR Estimates for Disability Attainment')
+summary(cc.model)
 
 # Get AUC
 predpr.cc = predict(cc.model,type=c("response"))
@@ -168,5 +169,3 @@ On this study we were assesed the performance of the Urban Ministries of Durham 
 When conducting the logistic regression case-control analysis we found out that men actually had a higher odds of developing a disability in comparison to women. This contra-indicates the results when considering the entire cohort. Although the case-control analysis did not have significant results, the estimates agree with the plots made in this project. We were able to show the majority of the number of disabilities are attribuuted to men and not women. 
 
 Urban Ministries of Durham should consider these findings when developing new programs to enhance the quality of living of members. Counselors should not only put extra careful with males in general for them not to develop any additional disabilities, but also special attention to women in the area of mental health problems. 
-
-

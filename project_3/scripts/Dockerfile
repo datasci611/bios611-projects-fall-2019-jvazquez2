@@ -1,4 +1,8 @@
 FROM jupyter/datascience-notebook
+FROM rocker/tidyverse
 
-RUN Rscript -e "install.packages(c("sjPlot", "pROC", "MatchIt", 'tidyverse'), dependencies=TRUE, repos='http://cran.rstudio.com/')"
-	
+# Install R packages
+RUN install2.r --error \
+    pROC \
+    MatchIt \
+    sjstats
